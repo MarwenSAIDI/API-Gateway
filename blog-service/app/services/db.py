@@ -1,5 +1,6 @@
 from sqlmodel import create_engine, SQLModel, Session
 from app.config import config
+from app.schemas.blog import Blog
 
 class Database:
     def __init__(self, database_url:str = config.DATABASE_URI):

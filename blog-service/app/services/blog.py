@@ -1,8 +1,9 @@
-from sqlmodel import SQLModel, Field
-from typing import Optional
+import requests
 
-class Blog(SQLModel, table=True):
-    id: Optional[int] = Field(primary_key=True, index=True)
-    witer_id: int = Field(foreign_key=True, index=True)
-    abstract:str
-    content: str
+def check_user_by_id(id_user:int, user_service_url:str):
+    
+    response = requests.get(f"{user_service_url}/{id_user}")
+
+    if response.status_code == 200:
+        return True
+    return False
