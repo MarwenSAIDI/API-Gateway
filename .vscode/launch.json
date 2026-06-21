@@ -1,57 +1,47 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
-            //api-gateway-service.app.main
             "name": "API Gateway-API",
             "type": "debugpy",
             "request": "launch",
             "python": "${workspaceFolder}/.venv/Scripts/python.exe",
             "module": "uvicorn",
+            "cwd": "${workspaceFolder}/api-gateway-service",
             "args": [
-                "api-gateway-service.app.main:app",
-                "--host",
-                "0.0.0.0",
-                "--port",
-                "8080",
+                "app.main:app",
+                "--host", "0.0.0.0",
+                "--port", "8080",
                 "--reload"
             ],
             "jinja": true
         },
         {
-            //user-service.app.main
             "name": "User Service-API",
             "type": "debugpy",
             "request": "launch",
             "python": "${workspaceFolder}/.venv/Scripts/python.exe",
             "module": "uvicorn",
+            "cwd": "${workspaceFolder}/user-service",
             "args": [
-                "user-service.app.main:app",
-                "--host",
-                "0.0.0.0",
-                "--port",
-                "8081",
+                "app.main:app",
+                "--host", "0.0.0.0",
+                "--port", "8081",
                 "--reload"
             ],
             "jinja": true
         },
         {
-            //blog-service.app.main
             "name": "Blog Service-API",
             "type": "debugpy",
             "request": "launch",
             "python": "${workspaceFolder}/.venv/Scripts/python.exe",
             "module": "uvicorn",
+            "cwd": "${workspaceFolder}/blog-service",
             "args": [
-                "blog-service.app.main:app",
-                "--host",
-                "0.0.0.0",
-                "--port",
-                "8082",
+                "app.main:app",
+                "--host", "0.0.0.0",
+                "--port", "8082",
                 "--reload"
             ],
             "jinja": true
