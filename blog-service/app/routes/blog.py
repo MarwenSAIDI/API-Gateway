@@ -12,8 +12,8 @@ router = APIRouter(prefix="/blogs",tags=['Blogs'])
 @router.post('/add', response_model=Blog)
 def add_blog(blog:Blog, session:Session = Depends(database.get_session)):
     # check if user exists
-    if not check_user_by_id(id_user=blog.writer_id, user_service_url=config.USER_SERVICE_URL):
-        raise HTTPException(status_code=404, detail="user not found!")
+    # if not check_user_by_id(id_user=blog.writer_id, user_service_url=config.USER_SERVICE_URL):
+    #     raise HTTPException(status_code=404, detail="user not found!")
     
     session.add(blog)
     session.commit()

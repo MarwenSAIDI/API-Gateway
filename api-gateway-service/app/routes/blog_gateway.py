@@ -1,10 +1,11 @@
 import httpx
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, HTTPException
 from typing import List
 from app.schemas.blog import Blog
 from app.config import config
 
 BLOG_SERVICE_URL = config.BLOG_SERVICE_URL
+USER_SERVICE_URL = config.USER_SERVICE_URL
 PREFIX = config.HOST_URL
 
 router = APIRouter(prefix='/blogs', tags=['Blog Service'])
@@ -14,6 +15,14 @@ async def add_blog(request:Request, blog:Blog):
     endpoint = str(request.url).replace(PREFIX, '')
 
     async with httpx.AsyncClient() as client:
+        # get the user
+        res = await client.get(f"{USER_SERVICE_URL}/users/{blog.writer_id}")
+
+        # check the user existance
+        if res.status_code == 404:
+            raise HTTPException(status_code=404, detail=res.json()['detail'])
+        
+        # add the blog
         res = await client.post(f"{BLOG_SERVICE_URL}{endpoint}", json=blog.model_dump())
 
     return Blog.model_validate(res.json())
